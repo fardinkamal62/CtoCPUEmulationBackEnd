@@ -50,8 +50,28 @@ const steps = {
  * @return {String} The path to the file
  */
 function storeCode(code) {
+    const fileExists = checkFolderExistence('temp');
+    if (!fileExists) {
+        fs.mkdirSync('temp');
+    }
+
     const rootPath = (path.resolve('.'));
     const filePath = path.join(rootPath, 'temp/input.c');
     fs.writeFileSync(filePath, code);
     return filePath;
+}
+
+/**
+ * @function checkFolderExistence
+ * @description Checks if a folder exists
+ * @param {String} filePath
+ * @return {boolean}
+ */
+function checkFolderExistence(filePath) {
+    try {
+        fs.accessSync(filePath, fs.constants.F_OK);
+        return true;
+    } catch (err) {
+        return false;
+    }
 }
