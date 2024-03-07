@@ -8,7 +8,7 @@ router.post('/', function (req, res) {
 });
 
 router.use((req, res) => {
-    res.json({code: 404, error: 'Not Found'});
+    res.status(404).json({code: 404, error: 'Not Found'});
 })
 
 module.exports = router;

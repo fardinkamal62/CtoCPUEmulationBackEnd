@@ -24,7 +24,7 @@ api.emulate = function (req, res) {
     exec(main, (err, stdout) => {
         if (err) {
             console.error(err);
-            res.code(500).json({ code: 500, error: err});
+            res.status(500).json({ code: 500, error: err});
             return;
         }
 
@@ -32,7 +32,7 @@ api.emulate = function (req, res) {
             emulated.push({step: steps[index], output: line});
         });
 
-        res.code(200).json({code: 200, data: emulated});
+        res.status(200).json({code: 200, data: emulated});
     });
 };
 
