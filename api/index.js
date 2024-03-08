@@ -14,7 +14,7 @@ api.emulate = function (req, res) {
     const {code} = req.body;
     const inputFile = storeCode(code);
 
-    const emulated = [];
+    let emulated = [];
     const rootPath = (path.resolve('.'))
 
     const assemblyFile = path.join(rootPath, 'temp/assembly.s'),
@@ -32,15 +32,15 @@ api.emulate = function (req, res) {
             emulated.push({step: steps[index], output: line});
         });
 
+        emulated.pop();
         res.status(200).json({code: 200, data: emulated});
     });
 };
 
 const steps = {
-    0: "pre-process",
-    1: "assembly",
-    2: "binary",
-    3: "instructions",
+    0: "assembly",
+    1: "binary",
+    2: "instructions",
 }
 
 /**
